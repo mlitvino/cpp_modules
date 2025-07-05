@@ -26,13 +26,14 @@ std::string	fit(const std::string &str)
 
 void	PhoneBook::display_contact()
 {
-	std::cout << std::string(44, '-') << '\n';
 	std::cout
+	<< std::string(44, '-') << '\n'
 	<< "|" << std::setw(10) << "index" << "|"
 	<< std::setw(10) << "first name" << "|"
 	<< std::setw(10) << "last name" << "|"
-	<< std::setw(10) << "nickname" << "|\n";
-	std::cout << std::string(44, '-') << '\n';
+	<< std::setw(10) << "nickname" << "|\n"
+	<< std::string(44, '-')
+	<< std::endl;
 }
 
 void	PhoneBook::display_contact(Contact& contact, int i)
@@ -41,7 +42,8 @@ void	PhoneBook::display_contact(Contact& contact, int i)
 	<< "|" << std::setw(10) << i << "|"
 	<< std::setw(10) << fit(contact.getFirstName()) << "|"
 	<< std::setw(10) << fit(contact.getLastName()) << "|"
-	<< std::setw(10) << fit(contact.getNickname()) << "|\n";
+	<< std::setw(10) << fit(contact.getNickname()) << "|"
+	<< std::endl;
 }
 
 void	PhoneBook::search(void)

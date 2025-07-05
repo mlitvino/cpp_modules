@@ -4,7 +4,6 @@
 #include <iostream>
 
 # define TIME_BUFFER 80
-# define MIN_AMOUNT_FOR_WITHDRAWAL 50
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
@@ -15,14 +14,17 @@ int	Account::getNbAccounts( void )
 {
 	return _nbAccounts;
 }
+
 int	Account::getTotalAmount( void )
 {
 	return _totalAmount;
 }
+
 int	Account::getNbDeposits( void )
 {
 	return _totalNbDeposits;
 }
+
 int	Account::getNbWithdrawals( void )
 {
 	return _totalNbWithdrawals;
@@ -44,6 +46,7 @@ void	Account::makeDeposit( int deposit )
 	int	p_amount = checkAmount();
 
 	++_nbDeposits;
+	++_totalNbDeposits;
 	_amount += deposit;
 	_displayTimestamp();
 	std::cout
@@ -57,31 +60,31 @@ void	Account::makeDeposit( int deposit )
 bool	Account::makeWithdrawal( int withdrawal )
 {
 	_displayTimestamp();
-	if (_amount < MIN_AMOUNT_FOR_WITHDRAWAL)
+	if (_amount - withdrawal < 0)
 	{
-		// std::cout
-		// << "index:" << _accountIndex << ";"
-		// << "p_amount:" << p_amount << ";"
-		// << "deposit:" << deposit << ";"
-		// << "amount:" << checkAmount() << ";"
-		// << "nb_deposits:" << _nbDeposits << ";"
-		// << std::endl;
+		std::cout
+		<< "index:" << _accountIndex << ";"
+		<< "p_amount:" << _amount << ";"
+		<< "withdrawal:refused:"
+		<< std::endl;
 		return (false);
-		// [19920104_091532] index:5;p_amount:23;withdrawal:refused
 	}
 	else
 	{
-		// std::cout
-		// << "index:" << _accountIndex << ";"
-		// << "p_amount:" << p_amount << ";"
-		// << "deposit:" << deposit << ";"
-		// << "amount:" << checkAmount() << ";"
-		// << "nb_deposits:" << _nbDeposits << ";"
-		// << std::endl;
-		return (true);
-		// [19920104_091532] index:7;p_amount:16596;withdrawal:7654;amount:8942;nb_withdrawals:1
-	}
+		int	p_amount = checkAmount();
 
+		++_totalNbWithdrawals;
+		++_nbWithdrawals;
+		_amount -= withdrawal;
+		std::cout
+		<< "index:" << _accountIndex << ";"
+		<< "p_amount:" << p_amount << ";"
+		<< "withdrawal:" << withdrawal << ";"
+		<< "amount:" << checkAmount() << ";"
+		<< "nb_withdrawals:" << _nbWithdrawals << ";"
+		<< std::endl;
+		return (true);
+	}
 }
 
 int		Account::checkAmount( void ) const
@@ -130,7 +133,7 @@ Account::Account(void)
 	<< std::endl;
 }
 
-Account::~Account()
+Account::~Account(void)
 {
 	_displayTimestamp();
 	std::cout
@@ -146,7 +149,7 @@ void	Account::_displayTimestamp(void)
 	tm		*timeinfo;
 	char	buffer[TIME_BUFFER];
 
-	raw_time = std::time(nullptr);
+	raw_time = std::time(0);
 	timeinfo = std::gmtime(&raw_time);
 	std::strftime(buffer, TIME_BUFFER, "[%G%m%d_%H%M%S] ", timeinfo);
 	std::cout << buffer;
