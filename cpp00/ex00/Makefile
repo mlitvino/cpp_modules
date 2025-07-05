@@ -8,11 +8,11 @@ OBJ		= $(SRC:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(SRC)
-	$(CC) $(CFLAGS) $< -o $@
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $^ -o $@
 
-$(OBJ): $(SRC)
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 clean:
 	rm -f $(OBJ)

@@ -8,10 +8,10 @@ OBJ		= $(SRC:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(SRC)
+$(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 
-$(OBJ): $(SRC)
+%.o: %.cpp
 	$(CC) $(CFLAGS) -c $^ -o $@
 
 clean:
