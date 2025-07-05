@@ -1,0 +1,3 @@
+The current error state of the stream.
+Individual values may be obtained by calling good, eof, fail and bad.
+See member type iostate.
