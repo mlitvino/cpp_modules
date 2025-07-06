@@ -27,7 +27,13 @@ Fixed::Fixed(void)
 	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed &fixed)
+explicit Fixed::Fixed(const int nbr)
+{
+	_nbr = nbr;
+	std::cout << "Copy constructor called" << std::endl;
+}
+
+explicit Fixed::Fixed(const Fixed &fixed)
 {
 	*this = fixed;
 	std::cout << "Copy constructor called" << std::endl;
