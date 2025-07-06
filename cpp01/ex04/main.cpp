@@ -2,66 +2,80 @@
 #include <iostream>
 #include <fstream>
 
-void	open_file(std::string& filename, std::string& text)
+# define BUFFER_SIZE 1024
+
+int	open_file(std::string& filename, std::string& text)
 {
 	std::ifstream	infile(filename);
+	static char		buf[BUFFER_SIZE];
 
-	if (!infile.is_open())
+	if (!infile.good())
 	{
-		std::cout << "Error: failed to open" << filename << "\n";
-		exit(1);
+		std::cout << "Error: failed to open: " << filename << "\n";
+		return 1;
 	}
 	text.clear();
-
-	int count = infile.gcount();
-;
-
-	count = infile.gcount();
-
-	std::cout << count << "\n";
-
-
-
+	while (infile.read(buf, BUFFER_SIZE) || infile.gcount() > 0)
+		text += buf;
 	infile.close();
+	if (infile.bad())
+	{
+		std::cout << "Error: failed to read: " << filename << "\n";
+		return 1;
+	}
+	return 0;
 }
 
-void	open_newfile(std::string& filename, std::string& text)
+void	format_text(std::string& text, std::string& s1, std::string& s2)
+{
+	std::size_t found;;
+
+	if (s1.empty())
+		return ;
+	while (1)
+	{
+		found = text.find(s1);
+		if (found == std::string::npos)
+			break ;
+		text.erase(found, s1.length());
+		text.insert(found, s2);
+	}
+}
+
+int	open_newfile(std::string& filename, std::string& text)
 {
 	std::string		new_filename = filename + ".replace";
 	std::ofstream	outfile(new_filename);
 
-	if (!outfile.is_open())
+	if (!outfile.good())
 	{
 		std::cout << "Error: failed to open" << new_filename << "\n";
-		exit(1);
+		return (1);
 	}
+	outfile << text;
 	outfile.close();
+	return 0;
 }
 
-void	get_input(char **argv)
+int	main(int argc, char **argv)
 {
 	std::string	text;
 	std::string	filename;
 	std::string	s1;
 	std::string	s2;
 
-	filename = argv[1];
-	s1 = argv[2];
-	s2 = argv[3];
-	open_file(filename, text);
-	//format_text(text, s1, s2);
-	//open_newfile(filename, text);
-}
-
-int	main(int argc, char **argv)
-{
 	if (argc != 4)
-	{
 		std::cout << "Usage: ./replace <filename> <s1> <s2>" << std::endl;
-	}
 	else
 	{
-		get_input(argv);
+		filename = argv[1];
+		s1 = argv[2];
+		s2 = argv[3];
+		if (open_file(filename, text))
+			return 1;
+		format_text(text, s1, s2);
+		if (open_newfile(filename, text))
+			return 1;
 	}
 	return 0;
 }
