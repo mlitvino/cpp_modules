@@ -1,0 +1,162 @@
+#include "Fixed.hpp"
+
+int	Fixed::getRawBits(void) const
+{
+	return _nbr;
+}
+
+void Fixed::setRawBits(int const raw)
+{
+	_nbr = raw;
+}
+
+float	Fixed::toFloat(void) const
+{
+	return static_cast<float>(_nbr) / (1 << _fract);
+}
+
+int	Fixed::toInt(void) const
+{
+	return _nbr >> _fract;
+}
+
+std::ostream&	operator<< (std::ostream& cout, const Fixed& fixed)
+{
+	cout << fixed.toFloat();
+	return cout;
+}
+
+const Fixed&	Fixed::max(const Fixed &nbr1, const Fixed &nbr2)
+{
+	return (nbr1 > nbr2 ? nbr1 : nbr2);
+}
+
+Fixed&	Fixed::max(Fixed &nbr1, Fixed &nbr2)
+{
+	return (nbr1 > nbr2 ? nbr1 : nbr2);
+}
+
+const Fixed&	Fixed::min(const Fixed &nbr1, const Fixed &nbr2)
+{
+	return (nbr1 < nbr2 ? nbr1 : nbr2);
+}
+
+Fixed&	Fixed::min(Fixed &nbr1, Fixed &nbr2)
+{
+	return (nbr1 < nbr2 ? nbr1 : nbr2);
+}
+
+// Increment/decrement
+
+Fixed&	Fixed::operator++ ()
+{
+	++_nbr;
+	return *this;
+}
+
+Fixed	Fixed::operator++ (int)
+{
+	Fixed new_copy(*this);
+
+	++_nbr;
+	return new_copy;
+}
+
+Fixed&	Fixed::operator-- ()
+{
+	--_nbr;
+	return *this;
+}
+
+Fixed	Fixed::operator-- (int)
+{
+	Fixed new_copy(*this);
+
+	--_nbr;
+	return new_copy;
+}
+
+// Arithmetic overloading operators
+
+Fixed Fixed::operator+ (const Fixed &nbr)
+{
+	return Fixed(_nbr + nbr._nbr);
+}
+
+Fixed Fixed::operator- (const Fixed &nbr)
+{
+	return Fixed(_nbr - nbr._nbr);
+}
+
+Fixed Fixed::operator* (const Fixed &nbr)
+{
+	return Fixed(_nbr * nbr._nbr);
+}
+
+Fixed Fixed::operator/ (const Fixed &nbr)
+{
+	return Fixed(_nbr / nbr._nbr);
+}
+
+// Comparion overloadong operators
+
+bool	Fixed::operator> (const Fixed &nbr) const
+{
+	return _nbr > nbr._nbr;
+}
+
+bool	Fixed::operator< (const Fixed &nbr) const
+{
+	return _nbr < nbr._nbr;
+}
+
+bool	Fixed::operator>= (const Fixed &nbr) const
+{
+	return _nbr >= nbr._nbr;
+}
+
+bool	Fixed::operator<= (const Fixed &nbr) const
+{
+	return _nbr <= nbr._nbr;
+}
+
+bool	Fixed::operator== (const Fixed &nbr) const
+{
+	return _nbr == nbr._nbr;
+}
+
+bool	Fixed::operator!= (const Fixed &nbr) const
+{
+	return _nbr != nbr._nbr;
+}
+
+// Constructors + Deconstructor
+
+Fixed& Fixed::operator= (const Fixed &fixed)
+{
+	if (this == &fixed)
+		return *this;
+	this->_nbr = fixed.getRawBits();
+	return *this;
+}
+
+Fixed::Fixed(void) : _nbr{0} {}
+
+Fixed::Fixed(const int nbr)
+	: _nbr{0}
+{
+	_nbr = nbr << _fract;
+}
+
+Fixed::Fixed(const float nbr)
+	: _nbr{0}
+{
+	_nbr = std::roundf(nbr * (1 << _fract));
+}
+
+Fixed::Fixed(const Fixed &fixed)
+{
+	*this = fixed;
+}
+
+Fixed::~Fixed(void) {}
