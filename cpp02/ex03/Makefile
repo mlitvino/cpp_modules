@@ -1,7 +1,7 @@
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++17
 
-NAME	= Fixed
+NAME	= BSP
 
 SRC		= main.cpp Fixed.cpp Point.cpp bsp.cpp
 OBJ		= $(SRC:.cpp=.o)
