@@ -4,6 +4,8 @@ int main()
 {
 	ClapTrap butthead("Butthead");
 	ClapTrap beavis("Beavis");
+	ClapTrap human1(beavis);
+	ClapTrap human2 = butthead;
 
 	for (int round = 1; round <= 4; ++round) {
 		std::cout << "[Round " << round << "]\n";

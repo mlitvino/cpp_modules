@@ -3,7 +3,10 @@
 
 int main()
 {
-	ScavTrap t1;
+	//ClapTrap	toy("Toy");
+	ScavTrap	robot("Robot");
+
+	robot.guardGate();
 
 	return 0;
 }

@@ -28,10 +28,9 @@ ScavTrap::ScavTrap()
 }
 
 ScavTrap::ScavTrap(std::string name)
-	: ScavTrap()
+	: ClapTrap(name)
 {
 	std::cout << "ScavTrap: Arg constructor called" << std::endl;
-	_name = name;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &obj)
