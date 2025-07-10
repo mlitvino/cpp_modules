@@ -16,7 +16,7 @@ void	FragTrap::highFivesGuys(void)
 	std::cout << "FragTrap: give me high five!" << std::endl;
 }
 
-// Constructors + Deconstructor
+// Constructors + Destructor
 
 FragTrap::FragTrap()
 {
@@ -42,7 +42,7 @@ FragTrap::FragTrap(const FragTrap &obj)
 
 FragTrap::~FragTrap()
 {
-	std::cout << "FragTrap: Deconstructor called" << std::endl;
+	std::cout << "FragTrap: Destructor called" << std::endl;
 }
 
 FragTrap& FragTrap::operator= (const FragTrap &obj)

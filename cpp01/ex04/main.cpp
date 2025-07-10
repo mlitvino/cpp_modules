@@ -28,17 +28,19 @@ int	open_file(std::string& filename, std::string& text)
 
 void	format_text(std::string& text, std::string& s1, std::string& s2)
 {
-	std::size_t found;;
+	std::size_t found;
 
 	if (s1.empty())
 		return ;
+	found = 0;
 	while (1)
 	{
-		found = text.find(s1);
+		found = text.find(s1, found);
 		if (found == std::string::npos)
 			break ;
 		text.erase(found, s1.length());
 		text.insert(found, s2);
+		found += s2.length();
 	}
 }
 

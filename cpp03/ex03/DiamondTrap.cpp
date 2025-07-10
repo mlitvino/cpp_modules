@@ -13,7 +13,7 @@ void	DiamondTrap::whoAmI()
 	<< std::endl;
 }
 
-// Constructors + Deconstructor
+// Constructors + Destructor
 
 DiamondTrap::DiamondTrap()
 {
@@ -41,7 +41,7 @@ DiamondTrap::DiamondTrap(const DiamondTrap &obj)
 
 DiamondTrap::~DiamondTrap()
 {
-	std::cout << "DiamondTrap: Deconstructor called" << std::endl;
+	std::cout << "DiamondTrap: Destructor called" << std::endl;
 }
 
 DiamondTrap& DiamondTrap::operator= (const DiamondTrap &obj)

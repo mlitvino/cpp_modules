@@ -1,5 +1,5 @@
 CC		= c++
-CFLAGS	= -Wall -Wextra -Werror -Wshadow -Wno-shadow -std=c++17
+CFLAGS	= -Wall -Wextra -Werror -Wshadow -std=c++17
 
 NAME	= FragTrap
 

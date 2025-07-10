@@ -9,7 +9,7 @@ int	main(void)
 	while (1)
 	{
 		std::cout << "Type command: ";
-		std::cin >> input;;
+		std::cin >> input;
 		if (std::cin.eof() || input == "EXIT")
 			break ;
 		phonebook.process_input(input);

@@ -19,7 +19,6 @@ class Harl
 	private:
 		std::string levels[MAX_LEVEL];
 		void (Harl::*levels_func[MAX_LEVEL])(void);
-		enum level levels_enum;
 		void debug(void);
 		void info(void);
 		void warning(void);

@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-# define HORDE_SIZE 1
+# define HORDE_SIZE 4
 # define HORDE_NAME "FakeHuman"
 
 class Zombie

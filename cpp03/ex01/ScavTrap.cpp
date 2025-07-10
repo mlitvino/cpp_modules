@@ -16,7 +16,7 @@ void	ScavTrap::guardGate()
 	std::cout << _name << " is now in Gate keeper mode" << std::endl;
 }
 
-// Constructors + Deconstructor
+// Constructors + Destructor
 
 ScavTrap::ScavTrap()
 {
@@ -43,7 +43,7 @@ ScavTrap::ScavTrap(const ScavTrap &obj)
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << "ScavTrap: Deconstructor called" << std::endl;
+	std::cout << "ScavTrap: Destructor called" << std::endl;
 }
 
 ScavTrap& ScavTrap::operator= (const ScavTrap &obj)

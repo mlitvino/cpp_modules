@@ -32,7 +32,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	<< std::endl;
 }
 
-// Constructors + Deconstructor
+// Constructors + Destructor
 
 ClapTrap::ClapTrap()
 	: _hp{10}
@@ -58,7 +58,7 @@ ClapTrap::ClapTrap(const ClapTrap &obj)
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "ClapTrap: Deconstructor called" << std::endl;
+	std::cout << "ClapTrap: Destructor called" << std::endl;
 }
 
 ClapTrap& ClapTrap::operator= (const ClapTrap &obj)
