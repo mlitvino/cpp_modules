@@ -3,9 +3,9 @@ CFLAGS	= -Wall -Wextra -Werror -std=c++17
 
 NAME	= Fixed
 
-SRC		= main.cpp Fixed.cpp Point.cpp bsp.cpp
+SRC		= main.cpp Fixed.cpp
 OBJ		= $(SRC:.cpp=.o)
-INCL	= Fixed.hpp Point.hpp
+INCL	= Fixed.hpp
 
 all: $(NAME)
 

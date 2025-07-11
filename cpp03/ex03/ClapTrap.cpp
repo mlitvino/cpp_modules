@@ -2,42 +2,47 @@
 
 void	ClapTrap::attack(const std::string& target)
 {
-	if (_energy <= 0)
+	if (_energy <= 0 || _hp <= 0)
 		return ;
 	--_energy;
 	std::cout
-	<< _name << " attacks " << target
+	<< "ClapTrap: " << _name << " attacks " << target
 	<< ", causing " << _attackDamage << " points pf damage!"
 	<< std::endl;
 }
 
 void	ClapTrap::takeDamage(unsigned int amount)
 {
-	_hp -= amount;
-	std::cout
-	<< _name << " takes " << amount << " points of damages "
-	<< (_hp > 0 ? "and still alive!" : "and dies!")
-	<< std::endl;
+	std::cout << _name << " takes " << amount << " points of damages ";
+	if (_hp <= 0)
+	{
+		std::cout << ", but he's already dead!" << std::endl;
+	}
+	else
+	{
+		_hp -= amount;
+		std::cout << (_hp > 0 ? "and still alive!" : "and dies!") << std::endl;
+	}
 }
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	if (_energy <= 0)
+	if (_energy <= 0 || _hp <= 0)
 		return ;
 	--_energy;
 	_hp += amount;
 	std::cout
 	<< _name << " repairs itself "
-	<< ", healing " << amount << " points pf damage!"
+	<< ", healing " << amount << " points of damage!"
 	<< std::endl;
 }
 
 // Constructors + Destructor
 
 ClapTrap::ClapTrap()
-	: _hp{10}
-	, _energy{10}
-	, _attackDamage{0}
+	: _hp{_default_hp}
+	, _energy{_default_energy}
+	, _attackDamage{_default_attackDamage}
 {
 	std::cout << "ClapTrap: Default constructor called" << std::endl;
 	_name = "nameless";

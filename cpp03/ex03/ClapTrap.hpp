@@ -11,6 +11,9 @@ class ClapTrap
 		int			_hp;
 		int			_energy;
 		int			_attackDamage;
+		static constexpr int	_default_hp = 10;
+		static constexpr int	_default_energy = 10;
+		static constexpr int	_default_attackDamage = 0;
 	public:
 		ClapTrap();
 		~ClapTrap();

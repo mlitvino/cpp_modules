@@ -20,18 +20,18 @@ int	Fixed::toInt(void) const
 	return _nbr >> _fract;
 }
 
-Fixed& Fixed::operator= (const Fixed &fixed)
+Fixed& Fixed::operator= (const Fixed &obj)
 {
 	std::cout << "Copy assignment constructor called" << std::endl;
-	if (this == &fixed)
+	if (this == &obj)
 		return *this;
-	this->_nbr = fixed.getRawBits();
+	this->_nbr = obj.getRawBits();
 	return *this;
 }
 
-std::ostream&	operator<< (std::ostream& cout, const Fixed& fixed)
+std::ostream&	operator<< (std::ostream& cout, const Fixed& obj)
 {
-	cout << fixed.toFloat();
+	cout << obj.toFloat();
 	return cout;
 }
 
@@ -42,23 +42,21 @@ Fixed::Fixed(void)
 }
 
 Fixed::Fixed(const int nbr)
-	: _nbr{0}
 {
-	_nbr = nbr << _fract;
 	std::cout << "Int constructor called" << std::endl;
+	_nbr = nbr << _fract;
 }
 
 Fixed::Fixed(const float nbr)
-	: _nbr{0}
 {
-	_nbr = std::roundf(nbr * (1 << _fract));
 	std::cout << "Float constructor called" << std::endl;
+	_nbr = std::roundf(nbr * (1 << _fract));
 }
 
-Fixed::Fixed(const Fixed &fixed)
+Fixed::Fixed(const Fixed &obj)
 {
-	*this = fixed;
 	std::cout << "Copy constructor called" << std::endl;
+	*this = obj;
 }
 
 Fixed::~Fixed(void)

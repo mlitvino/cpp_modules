@@ -3,8 +3,15 @@
 
 #include "ClapTrap.hpp"
 
+#include <string>
+#include <iostream>
+
 class FragTrap : public virtual ClapTrap
 {
+	protected:
+		static constexpr int	_default_hp = 100;
+		static constexpr int	_default_energy = 100;
+		static constexpr int	_default_attackDamage = 30;
 	public:
 		FragTrap();
 		~FragTrap();

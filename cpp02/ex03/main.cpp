@@ -25,15 +25,15 @@ int main() {
 		Point(Fixed(3.0f),   Fixed(1.5f)),    // 9 inside
 		Point(Fixed(-1.0f),  Fixed(0.0f)),    // 10 outside
 		Point(Fixed(6.0f),   Fixed(6.0f)),    // 11 outside
-		Point(Fixed(2.5f),   Fixed(2.5f)),    // 12 inside
+		Point(Fixed(2.5f),   Fixed(2.5f)),    // 12 outside
 		Point(Fixed(4.9f),   Fixed(0.1f)),    // 13 outside
 		Point(Fixed(0.1f),   Fixed(4.9f)),    // 14 outside
 		Point(Fixed(1.25f),  Fixed(1.25f)),   // 15 inside
 		Point(Fixed(2.6f),   Fixed(2.6f)),    // 16 outside
-		Point(Fixed(1.875f), Fixed(0.625f)),  // 17 inside
-		Point(Fixed(3.125f), Fixed(1.875f)),  // 18 on edge
+		Point(Fixed(1.87f), Fixed(0.62f)),  // 17 inside
+		Point(Fixed(3.12f), Fixed(1.88f)),  // 18 on edge
 		Point(Fixed(2.5f),   Fixed(2.6f)),    // 19 outside
-		Point(Fixed(2.5f),   Fixed(2.499f))   // 20 inside
+		Point(Fixed(2.5f),   Fixed(2.48f))   // 20 inside
 	};
 	std::size_t nTests = sizeof(tests) / sizeof(tests[0]);
 

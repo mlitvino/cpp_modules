@@ -1,5 +1,4 @@
 #include "Fixed.hpp"
-#include "Point.hpp"
 
 int main( void ) {
 	Fixed t1(3.12f);
@@ -45,6 +44,11 @@ int main( void ) {
 	std::cout << "t2-- - " << t2-- << std::endl;
 	t2++;
 	std::cout << "--t2 - " << --t2 << std::endl;
+
+	Fixed c1(5);
+	Fixed c2(0);
+
+	// std::cout << "c1  c2 = " << c1 / c2 << std::endl; // DO IT!
 
 	return 0;
 }

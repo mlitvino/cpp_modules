@@ -1,7 +1,7 @@
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -Wshadow -std=c++17
 
-NAME	= FragTrap
+NAME	= DiamondTrap
 
 SRC		= main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 OBJ		= $(SRC:.cpp=.o)

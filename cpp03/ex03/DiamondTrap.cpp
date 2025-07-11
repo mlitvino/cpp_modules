@@ -19,9 +19,9 @@ DiamondTrap::DiamondTrap()
 {
 	std::cout << "DiamondTrap: Default constructor called" << std::endl;
 	_name = "nameless";
-	_hp = FragTrap::_hp;
-	_energy = ScavTrap::_energy;
-	_attackDamage = FragTrap::_attackDamage;
+	_hp = FragTrap::_default_hp;
+	_energy = ScavTrap::_default_energy;
+	_attackDamage = FragTrap::_default_attackDamage;
 }
 
 DiamondTrap::DiamondTrap(std::string name)

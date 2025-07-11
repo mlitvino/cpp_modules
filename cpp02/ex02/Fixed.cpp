@@ -20,30 +20,30 @@ int	Fixed::toInt(void) const
 	return _nbr >> _fract;
 }
 
-std::ostream&	operator<< (std::ostream& cout, const Fixed& fixed)
+std::ostream&	operator<< (std::ostream& cout, const Fixed& obj)
 {
-	cout << fixed.toFloat();
+	cout << obj.toFloat();
 	return cout;
 }
 
-const Fixed&	Fixed::max(const Fixed &nbr1, const Fixed &nbr2)
+const Fixed&	Fixed::max(const Fixed &obj1, const Fixed &obj2)
 {
-	return (nbr1 > nbr2 ? nbr1 : nbr2);
+	return (obj1 > obj2 ? obj1 : obj2);
 }
 
-Fixed&	Fixed::max(Fixed &nbr1, Fixed &nbr2)
+Fixed&	Fixed::max(Fixed &obj1, Fixed &obj2)
 {
-	return (nbr1 > nbr2 ? nbr1 : nbr2);
+	return (obj1 > obj2 ? obj1 : obj2);
 }
 
-const Fixed&	Fixed::min(const Fixed &nbr1, const Fixed &nbr2)
+const Fixed&	Fixed::min(const Fixed &obj1, const Fixed &obj2)
 {
-	return (nbr1 < nbr2 ? nbr1 : nbr2);
+	return (obj1 < obj2 ? obj1 : obj2);
 }
 
-Fixed&	Fixed::min(Fixed &nbr1, Fixed &nbr2)
+Fixed&	Fixed::min(Fixed &obj1, Fixed &obj2)
 {
-	return (nbr1 < nbr2 ? nbr1 : nbr2);
+	return (obj1 < obj2 ? obj1 : obj2);
 }
 
 // Increment/decrement
@@ -153,13 +153,11 @@ Fixed& Fixed::operator= (const Fixed &fixed)
 Fixed::Fixed(void) : _nbr{0} {}
 
 Fixed::Fixed(const int nbr)
-	: _nbr{0}
 {
 	_nbr = nbr << _fract;
 }
 
 Fixed::Fixed(const float nbr)
-	: _nbr{0}
 {
 	_nbr = std::roundf(nbr * (1 << _fract));
 }

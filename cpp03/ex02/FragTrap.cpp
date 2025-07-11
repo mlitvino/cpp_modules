@@ -6,7 +6,7 @@ void	FragTrap::attack(const std::string& target)
 		return ;
 	--_energy;
 	std::cout
-	<< _name << " attacks " << target
+	<< "FragTrap: " << _name << " attacks " << target
 	<< ", causing " << _attackDamage << " points pf damage!"
 	<< std::endl;
 }
@@ -28,13 +28,13 @@ FragTrap::FragTrap()
 }
 
 FragTrap::FragTrap(std::string name)
-	: ClapTrap(name)
+	: FragTrap()
 {
 	std::cout << "FragTrap: Arg constructor called" << std::endl;
+	_name = name;
 }
 
 FragTrap::FragTrap(const FragTrap &obj)
-	: ClapTrap()
 {
 	std::cout << "FragTrap: Copy constructor called" << std::endl;
 	*this = obj;

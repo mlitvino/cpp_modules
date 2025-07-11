@@ -7,6 +7,7 @@ int main()
 	ScavTrap	robot("Robot");
 
 	robot.guardGate();
+	robot.attack("Vampire");
 
 	return 0;
 }

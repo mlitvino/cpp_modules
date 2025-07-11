@@ -153,13 +153,11 @@ Fixed& Fixed::operator= (const Fixed &fixed)
 Fixed::Fixed(void) : _nbr{0} {}
 
 Fixed::Fixed(const int nbr)
-	: _nbr{0}
 {
 	_nbr = nbr << _fract;
 }
 
 Fixed::Fixed(const float nbr)
-	: _nbr{0}
 {
 	_nbr = std::roundf(nbr * (1 << _fract));
 }
