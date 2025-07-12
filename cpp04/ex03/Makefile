@@ -1,11 +1,13 @@
 CC		= c++
-CFLAGS	= -Wall -Wextra -Werror -Wshadow -std=c++17
+CFLAGS	= -Wall 						-Wextra -Wshadow -std=c++17
 
-NAME	= Brain
+NAME	= AMateria
 
-SRC		=	main.cpp
+SRC		=	main.cpp AMateria.cpp Ice.cpp Cure.cpp \
+			ICharacter.cpp Character.cpp
 OBJ		= $(SRC:.cpp=.o)
-INCL	=	
+INCL	=	AMateria.hpp Ice.hpp Cure.hpp \
+			ICharacter.hpp Character.hpp
 
 all: $(NAME)
 

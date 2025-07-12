@@ -2,8 +2,8 @@
 #define CAT_HPP
 
 #include "Animal.hpp"
-#include "iostream"
-#include "string.h"
+
+#include <iostream>
 
 class Cat : public Animal
 {

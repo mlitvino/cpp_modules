@@ -1,7 +1,7 @@
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -Wshadow -std=c++17
 
-NAME	= Brain
+NAME	= AAnimal
 
 SRC		=	main.cpp Animal.cpp Dog.cpp Cat.cpp \
 			WrongAnimal.cpp WrongCat.cpp Brain.cpp

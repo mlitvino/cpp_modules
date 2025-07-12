@@ -9,8 +9,8 @@ void	Cat::makeSound() const
 
 Cat::Cat()
 {
-	type = "Cat";
 	std::cout << "Cat: Default constructor called" << std::endl;
+	type = "Cat";
 }
 
 Cat::~Cat()
@@ -19,9 +19,10 @@ Cat::~Cat()
 }
 
 Cat::Cat(const Cat& obj)
+	: Animal()
 {
-	type = obj.type;
 	std::cout << "Cat: Copy constructor called" << std::endl;
+	*this = obj;
 }
 
 Cat& Cat::operator=(const Cat& obj)

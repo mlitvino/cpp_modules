@@ -11,7 +11,7 @@ Dog::Dog()
 {
 	std::cout << "Dog: Default constructor called" << std::endl;
 	type = "Dog";
-	brain =  new Brain;
+	brain = new Brain;
 }
 
 Dog::~Dog()
@@ -21,9 +21,11 @@ Dog::~Dog()
 }
 
 Dog::Dog(const Dog& obj)
+	: Animal()
+	, brain(new Brain(*obj.brain))
 {
 	std::cout << "Dog: Copy constructor called" << std::endl;
-	*this = obj;
+	type = obj.type;
 }
 
 Dog& Dog::operator=(const Dog& obj)
@@ -32,5 +34,7 @@ Dog& Dog::operator=(const Dog& obj)
 	if (this == &obj)
 		return *this;
 	type = obj.type;
+	delete brain;
+	brain = new Brain(*obj.brain);
 	return *this;
 }

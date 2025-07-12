@@ -24,9 +24,9 @@ Animal::~Animal()
 }
 
 Animal::Animal(const Animal& obj)
-	: type{obj.type}
 {
 	std::cout << "Animal: Copy constructor called" << std::endl;
+	*this = obj;
 }
 
 Animal& Animal::operator=(const Animal& obj)

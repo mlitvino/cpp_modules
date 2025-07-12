@@ -5,6 +5,8 @@
 #include "WrongCat.hpp"
 #include "Brain.hpp"
 
+# define LOOP_N 6
+
 int main()
 {
 	const Animal*	j = new Dog();
@@ -17,14 +19,12 @@ int main()
 
 	std::cout << "-------------------\n";
 
-	Animal *arr[10];
+	Animal *arr[LOOP_N];
 
-	std::cout << "-----\n";
-
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < LOOP_N; ++i)
 	{
 		std::cout << "Loop i: " << i << std::endl;
-		if (i < 10 / 2)
+		if (i < LOOP_N / 2)
 		{
 			arr[i] = new Dog();
 		}
@@ -36,11 +36,24 @@ int main()
 
 	std::cout << "-----\n";
 
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < LOOP_N; ++i)
 	{
 		std::cout << "Loop i: " << i << std::endl;
 		delete arr[i];
 	}
+
+	std::cout << "-----\n";
+
+	Dog *d1 = new Dog();
+	Dog d2 = *d1;
+
+	d2 = d2;
+	*d1 = *d1;
+
+	Dog d3(d2);
+	d3 = d2;
+
+	delete d1;
 
 	return 0;
 }
