@@ -14,13 +14,13 @@ class Character : public ICharacter
 	private:
 		std::string	_name;
 		AMateria	*_inv[MAX_SLOT];
-		int			_invSize;
 	public:
 		Character();
 		Character(const Character& obj);
 		Character& operator= (const Character& obj);
-		~Character();
+		virtual ~Character();
 
+		Character(const std::string& name);
 		std::string const & getName() const override;
 		void equip(AMateria* m) override;
 		void unequip(int idx) override;

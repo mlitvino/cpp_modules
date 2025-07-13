@@ -1,13 +1,13 @@
 CC		= c++
-CFLAGS	= -Wall 						-Wextra -Wshadow -std=c++17
+CFLAGS	= -Wall -Werror -Wextra -Wshadow -std=c++17
 
 NAME	= AMateria
 
 SRC		=	main.cpp AMateria.cpp Ice.cpp Cure.cpp \
-			ICharacter.cpp Character.cpp
+			Character.cpp MateriaSource.cpp
 OBJ		= $(SRC:.cpp=.o)
 INCL	=	AMateria.hpp Ice.hpp Cure.hpp \
-			ICharacter.hpp Character.hpp
+			ICharacter.hpp Character.hpp IMateriaSouce.hpp
 
 all: $(NAME)
 
