@@ -7,7 +7,7 @@ SRC		=	main.cpp AMateria.cpp Ice.cpp Cure.cpp \
 			Character.cpp MateriaSource.cpp
 OBJ		= $(SRC:.cpp=.o)
 INCL	=	AMateria.hpp Ice.hpp Cure.hpp \
-			ICharacter.hpp Character.hpp IMateriaSouce.hpp
+			ICharacter.hpp Character.hpp IMateriaSource.hpp
 
 all: $(NAME)
 

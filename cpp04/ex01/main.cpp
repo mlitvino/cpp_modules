@@ -47,7 +47,6 @@ int main()
 	Dog *d1 = new Dog();
 	Dog d2 = *d1;
 
-	d2 = d2;
 	*d1 = *d1;
 
 	Dog d3(d2);

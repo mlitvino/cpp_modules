@@ -46,6 +46,7 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& obj)
 	for (int i = 0; i < MAX_SLOT; ++i)
 	{
 		delete _inv[i];
+		_inv[i] = nullptr;
 		if (obj._inv[i])
 			_inv[i] = obj._inv[i]->clone();
 	}
