@@ -2,11 +2,11 @@
 
 int	main()
 {
-	Bureaucraft	Kafka("Kafka");
+	Bureaucraft	Kafka("Kafka", 200);
 
 	std::cout << Kafka << std::endl;
 
-	Kafka.increaseGrade();
+	Kafka.decreaseGrade();
 
 	std::cout << Kafka << std::endl;
 

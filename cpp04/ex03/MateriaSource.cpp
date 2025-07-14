@@ -2,7 +2,7 @@
 
 void MateriaSource::learnMateria(AMateria* obj)
 {
-	for (int i = 0; i < MAX_SLOT; ++i)
+	for (int i = 0; i < IMAT_MAX_SLOT; ++i)
 	{
 		if (!_inv[i])
 		{
@@ -14,7 +14,7 @@ void MateriaSource::learnMateria(AMateria* obj)
 
 AMateria* MateriaSource::createMateria(std::string const & type)
 {
-	for (int i = 0; i < MAX_SLOT; ++i)
+	for (int i = 0; i < IMAT_MAX_SLOT; ++i)
 	{
 		if (_inv[i] && _inv[i]->getType() == type)
 			return _inv[i]->clone();
@@ -43,7 +43,7 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& obj)
 	std::cout << "MateriaSource: Copy assignment constructor called" << std::endl;
 	if (this == &obj)
 		return *this;
-	for (int i = 0; i < MAX_SLOT; ++i)
+	for (int i = 0; i < IMAT_MAX_SLOT; ++i)
 	{
 		delete _inv[i];
 		_inv[i] = nullptr;
@@ -56,7 +56,7 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& obj)
 MateriaSource::~MateriaSource()
 {
 	std::cout << "MateriaSource: Destructor called" << std::endl;
-	for (int i = 0; i < MAX_SLOT; ++i)
+	for (int i = 0; i < IMAT_MAX_SLOT; ++i)
 	{
 		if (_inv[i])
 			delete _inv[i];

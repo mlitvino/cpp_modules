@@ -6,12 +6,12 @@
 #include <string>
 #include <iostream>
 
-#define MAX_SLOT 4
+#define IMAT_MAX_SLOT 4
 
 class MateriaSource : public IMateriaSource
 {
 	private:
-		AMateria	*_inv[MAX_SLOT];
+		AMateria	*_inv[IMAT_MAX_SLOT];
 	public:
 		MateriaSource();
 		MateriaSource(const MateriaSource& obj);

@@ -19,10 +19,24 @@ class Bureaucraft
 		Bureaucraft& operator= (const Bureaucraft& obj);
 
 		Bureaucraft(const std::string& name);
+		Bureaucraft(const std::string& name, int grade);
 		const std::string&	getName() const;
 		int					getGrade() const;
 		void				increaseGrade();
 		void				decreaseGrade();
+
+	class GradeTooLowException : public std::exception {
+		public:
+			const char* what() const noexcept override {
+				return "Grade too low!";
+			}
+	};
+	class GradeTooHighException : public std::exception {
+		public:
+			const char* what() const noexcept override {
+				return "Grade too high!";
+			}
+	};
 };
 
 std::ostream&	operator<<(std::ostream& out, const Bureaucraft& obj);
