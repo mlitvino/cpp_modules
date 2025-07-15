@@ -40,6 +40,11 @@ std::ostream&	operator<<(std::ostream& out, const Bureaucraft& obj)
 	return out;
 }
 
+void	Bureaucraft::signForm(Form& obj) const
+{
+	obj.signForm();
+}
+
 Bureaucraft::Bureaucraft(const std::string& name)
 	: _name{name}
 	, _grade{75}

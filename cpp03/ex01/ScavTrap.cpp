@@ -35,6 +35,7 @@ ScavTrap::ScavTrap(std::string name)
 }
 
 ScavTrap::ScavTrap(const ScavTrap &obj)
+	: ScavTrap()
 {
 	std::cout << "ScavTrap: Copy constructor called" << std::endl;
 	*this = obj;
