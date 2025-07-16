@@ -1,83 +1,77 @@
 #include "Bureaucrat.hpp"
 
-const std::string&	Bureaucraft::getName() const
+void	Bureaucrat::signForm(Form& obj)
 {
-	return _name;
-}
-
-int		Bureaucraft::getGrade() const
-{
-	return _grade;
-}
-
-void	Bureaucraft::increaseGrade()
-{
-	try {
-		if (_grade - 1 < MAX_GRADE)
-			throw GradeTooLowException();
-		--_grade;
+	try
+	{
+		obj.beSigned(getGrade());
+		std::cout << _name << " signed " << obj.getName() << std::endl;
 	}
-	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+	catch(std::exception& e)
+	{
+		std::cout
+		<< _name << " couldn't sign " << obj.getName() << " because " << e.what()
+		<< std::endl;
 	}
 }
 
-void	Bureaucraft::decreaseGrade()
+void	Bureaucrat::increaseGrade()
 {
-	try {
-		if (_grade + 1 > MIN_GRADE)
-			throw GradeTooHighException();
-		++_grade;
-	}
-	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
-	}
+	if (_grade - 1 < MAX_GRADE)
+		throw GradeTooLowException();
+	--_grade;
 }
 
-std::ostream&	operator<<(std::ostream& out, const Bureaucraft& obj)
+void	Bureaucrat::decreaseGrade()
+{
+	if (_grade + 1 > MIN_GRADE)
+		throw GradeTooHighException();
+	++_grade;
+}
+
+std::ostream&	operator<<(std::ostream& out, const Bureaucrat& obj)
 {
 	out << obj.getName() << ", bureacraft grade " << obj.getGrade();
 	return out;
 }
 
-void	Bureaucraft::signForm(Form& obj) const
+// Getters
+
+const std::string&	Bureaucrat::getName() const
 {
-	obj.signForm();
+	return _name;
 }
 
-Bureaucraft::Bureaucraft(const std::string& name)
-	: _name{name}
-	, _grade{75}
-{}
-
-Bureaucraft::Bureaucraft(const std::string& name, int grade)
-	: Bureaucraft(name)
+int		Bureaucrat::getGrade() const
 {
-	try {
-		if (grade > MIN_GRADE)
-			throw GradeTooLowException();
-		if (grade < MAX_GRADE)
-			throw GradeTooHighException();
-		_grade = grade;
-	}
-	catch (std::exception& e) {
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
+	return _grade;
+}
+
+// Extra Constructors
+
+Bureaucrat::Bureaucrat(const std::string& name, int grade)
+	: _name{name}
+{
+	if (grade > MIN_GRADE)
+		throw GradeTooLowException();
+	else if (grade < MAX_GRADE)
+		throw GradeTooHighException();
+	_grade = grade;
 }
 
 // Orthodox Canonical Form
 
-Bureaucraft::Bureaucraft()
+Bureaucrat::Bureaucrat()
 	: _name{"nameless"}
-	, _grade{150}
+	, _grade{75}
 {}
 
-Bureaucraft::Bureaucraft(const Bureaucraft& obj)
+Bureaucrat::Bureaucrat(const Bureaucrat& obj)
 {
 	*this = obj;
 }
 
-Bureaucraft& Bureaucraft::operator= (const Bureaucraft& obj)
+Bureaucrat& Bureaucrat::operator= (const Bureaucrat& obj)
 {
 	if (this == &obj)
 		return *this;
@@ -85,4 +79,4 @@ Bureaucraft& Bureaucraft::operator= (const Bureaucraft& obj)
 	return *this;
 }
 
-Bureaucraft::~Bureaucraft() {}
+Bureaucrat::~Bureaucrat() {}

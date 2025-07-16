@@ -1,10 +1,13 @@
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++17
 
-NAME	= Form
+NAME	= Intern
 
-SRC		= main.cpp Bureaucrat.cpp Form.cpp
+SRC		=	main.cpp Bureaucrat.cpp AForm.cpp Intern.cpp \
+			PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
 OBJ		= $(SRC:.cpp=.o)
+
+.SECONDARY: $(OBJ)
 
 all: $(NAME)
 
@@ -20,7 +23,7 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-start: all
+start: all clean
 	./$(NAME)
 
 re: fclean all

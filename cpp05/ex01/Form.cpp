@@ -1,5 +1,28 @@
 #include "Form.hpp"
 
+void	Form::beSigned(int grade)
+{
+	if (grade > getSignGrade())
+		throw GradeTooLowException();
+	_signed = true;
+}
+
+std::ostream&	operator<<(std::ostream& out, const Form& obj)
+{
+	out
+	<< obj.getName() << ", form grade to sign " << obj.getSignGrade()
+	<< ", grade to execute " << obj.getExecGrade()
+	<< ", signed " << obj.isSigned() ? " true" : " false";
+	return out;
+}
+
+// Getters
+
+bool Form::isSigned() const
+{
+	return _signed;
+}
+
 const std::string& Form::getName() const
 {
 	return _name;
@@ -15,43 +38,18 @@ const int&	Form::getExecGrade() const
 	return _execGrade;
 }
 
-void		Form::signForm()
-{
-	_signed = true;
-}
-
-void		Form::beSigned(const Bureaucraft& obj)
-{
-	try {
-		if (obj.getGrade() > getSignGrade())
-			throw GradeTooLowException();
-		signForm();
-	}
-	catch (std::exception& e) {
-		std::cout << e.what() << std::endl;
-	}
-}
-
-itn	checkGrade(int grade)
-{
-
-}
+// Extra Constructors
 
 Form::Form(const std::string& name, int signGrade, int execGrade)
 	: _name{name}
 	, _signed{false}
-	, _signGrade{checkGrade(signGrade)}
-	, _execGrade{checkGrade(execGrade)}
+	, _signGrade{signGrade}
+	, _execGrade{execGrade}
 {
-	try {
-		if (signGrade > MIN_GRADE || execGrade > MIN_GRADE)
-			throw GradeTooLowException();
-		if (signGrade < MAX_GRADE || execGrade < MAX_GRADE)
-			throw GradeTooHighException();
-	}
-	catch (std::exception& e) {
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
+	if (signGrade > MIN_GRADE || execGrade > MIN_GRADE)
+		throw GradeTooLowException();
+	else if (signGrade < MAX_GRADE || execGrade < MAX_GRADE)
+		throw GradeTooHighException();
 }
 
 // Orthodox Canonical Form

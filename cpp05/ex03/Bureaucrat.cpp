@@ -1,13 +1,34 @@
 #include "Bureaucrat.hpp"
 
-const std::string&	Bureaucrat::getName() const
+void	Bureaucrat::executeForm(AForm const& form)
 {
-	return _name;
+	try
+	{
+		form.execute(*this);
+		std::cout << _name << " executed " << form.getName() << std::endl;
+	}
+	catch(std::exception& e)
+	{
+		std::cout
+		<< "Error: "
+		<< _name << " couldn't execute " << form.getName() << " because " << e.what()
+		<< std::endl;
+	}
 }
 
-int		Bureaucrat::getGrade() const
+void	Bureaucrat::signForm(AForm& obj)
 {
-	return _grade;
+	try
+	{
+		obj.beSigned(getGrade());
+		std::cout << _name << " signed " << obj.getName() << std::endl;
+	}
+	catch(std::exception& e)
+	{
+		std::cout
+		<< _name << " couldn't sign " << obj.getName() << " because " << e.what()
+		<< std::endl;
+	}
 }
 
 void	Bureaucrat::increaseGrade()
@@ -30,6 +51,20 @@ std::ostream&	operator<<(std::ostream& out, const Bureaucrat& obj)
 	return out;
 }
 
+// Getters
+
+const std::string&	Bureaucrat::getName() const
+{
+	return _name;
+}
+
+int		Bureaucrat::getGrade() const
+{
+	return _grade;
+}
+
+// Extra Constructors
+
 Bureaucrat::Bureaucrat(const std::string& name, int grade)
 	: _name{name}
 {
@@ -40,7 +75,7 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade)
 	_grade = grade;
 }
 
-// Orthodox Canonical Form
+// Orthodox Canonical
 
 Bureaucrat::Bureaucrat()
 	: _name{"nameless"}
