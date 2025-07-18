@@ -1,7 +1,7 @@
 CC		= c++
-CFLAGS	= -Wall -Wextra 																							 -std=c++17
+CFLAGS	= -Wall -Wextra -Werror -std=c++17																					 -std=c++17
 
-NAME	= Converter
+NAME	= convert
 
 SRC		=	main.cpp ScalarConverter.cpp
 OBJ		= $(SRC:.cpp=.o)
