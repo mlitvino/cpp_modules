@@ -145,7 +145,8 @@ static int	detectTYPE(const std::string& str)
 
 void	ScalarConverter::convert(const std::string& str)
 {
-	try {
+	try
+	{
 		int type = detectTYPE(str);
 		convertStrToTypes(str, type);
 	}
