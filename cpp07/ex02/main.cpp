@@ -1,31 +1,57 @@
 #include "Array.hpp"
 #include <iostream>
 
-int main()
+#define MAX_VAL 750
+int main(int, char**)
 {
-	Array<int>	t1;
-	Array<int>	t2(30);
+    Array<int> numbers(MAX_VAL);
+    int* mirror = new int[MAX_VAL];
+    srand(time(NULL));
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        const int value = rand();
+        numbers[i] = value;
+        mirror[i] = value;
+    }
+    //SCOPE
+    {
+        Array<int> tmp = numbers;
+        Array<int> test(tmp);
+    }
 
-	Array<double> t3(30);
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        if (mirror[i] != numbers[i])
+        {
+            std::cerr << "didn't save the same value!!" << std::endl;
+            return 1;
+        }
+    }
+    try
+    {
+        numbers[-2] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    try
+    {
+        numbers[MAX_VAL] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 
-	Array<char********> t4(123);
-
-	t2 = t2;
-	t1 = t2;
-
-	for (int i = 0; i < 30; ++i)
-	{
-		std::cout << "Loop i: " << i << std::endl;
-		std::cout << "t1 " << t1[i] << std::endl;
-		std::cout << "t2 " << t2[i] << std::endl;
-		std::cout << "t3 " << t3[i] << std::endl;
-	}
-
-	// Invalid
-
-	//t1 = t3;
-	//std::cout << t1[-1] << std::endl;
-	//std::cout << t2[10] << std::endl;
-
-	return 0;
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        numbers[i] = rand();
+    }
+    for (int i = 0; i < MAX_VAL / 100; i++)
+    {
+        std::cout << numbers[i] << std::endl;
+    }
+    delete [] mirror;//
+    return 0;
 }

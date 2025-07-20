@@ -7,7 +7,7 @@ Array<T>::Array(unsigned int n)
 {}
 
 template<typename T>
-T Array<T>::operator[] (size_t i)
+T& Array<T>::operator[] (size_t i)
 {
 	if (i >= _size)
 		throw std::out_of_range("index outside the bounds of the array");
@@ -46,7 +46,7 @@ Array<T>::Array(const Array& other)
 template<typename T>
 Array<T>& Array<T>::operator= (const Array& other)
 {
-	T* temp = new T[other._size];
+	T* temp = new T[other._size]();
 	for (size_t i = 0, end = other._size; i != end; ++i)
 	{
 		temp[i] = other._arr[i];
