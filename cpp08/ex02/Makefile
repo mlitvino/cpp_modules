@@ -1,9 +1,9 @@
-CC		= c++ -g
+CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++17
 
 NAME	= mutant
 
-SRC		=	main.cpp MutantStack.hpp
+SRC		=	main.cpp
 OBJ		= $(SRC:.cpp=.o)
 
 all: $(NAME)

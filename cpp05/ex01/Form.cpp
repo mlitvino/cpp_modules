@@ -12,7 +12,7 @@ std::ostream&	operator<<(std::ostream& out, const Form& obj)
 	out
 	<< obj.getName() << ", form grade to sign " << obj.getSignGrade()
 	<< ", grade to execute " << obj.getExecGrade()
-	<< ", signed " << obj.isSigned() ? " true" : " false";
+	<< ", signed " << (obj.isSigned() ? " true" : " false");
 	return out;
 }
 

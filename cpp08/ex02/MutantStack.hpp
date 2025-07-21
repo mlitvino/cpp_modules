@@ -6,7 +6,17 @@
 template <typename T>
 class MutantStack : public std::stack<T>
 {
-	std::iterator<std::forward_iterator_tag, T, T, T*, T> iterator;
+	public:
+		~MutantStack();
+		MutantStack();
+		MutantStack(const MutantStack& other);
+		MutantStack& operator=(const MutantStack& other);
+
+		typedef typename std::deque<T>::iterator iterator;
+		iterator			begin();
+		iterator			end();
 };
+
+#include "MutantStack.tpp"
 
 #endif
