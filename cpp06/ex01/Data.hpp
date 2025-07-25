@@ -1,15 +1,17 @@
 #ifndef DATA_HPP
 #define DATA_HPP
 
-struct Data
+class Data
 {
-	int x;
-	int y;
+	private:
+		int x;
+		int y;
 
-	Data();
-	Data(const Data& other);
-	Data& operator= (const Data& other);
-	~Data();
+	public:
+		Data();
+		Data(const Data& other);
+		Data& operator= (const Data& other);
+		~Data();
 };
 
 #endif

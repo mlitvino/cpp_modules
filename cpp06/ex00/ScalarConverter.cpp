@@ -107,14 +107,14 @@ static int	detectTYPE(const std::string& str)
 		return DOUBLE_TYPE;
 
 	std::string specSymb = "+-f.";
-	for (int i = 0, c; specSymb[i]; ++i)
+	for (size_t i = 0, c; specSymb[i]; ++i)
 	{
 		c = 0;
-		for (int j = 0; str[j]; ++j)
+		for (size_t j = 0; str[j]; ++j)
 		{
 			if (str[j] == specSymb[i])
 				++c;
-			if ((str[j] == 'f' && j != static_cast<int>(str.length() - 1))
+			if ((str[j] == 'f' && j != str.length() - 1)
 				|| ((str[j] == '+' || str[j] == '-') && j != 0)
 				|| (specSymb.find(str[j]) == std::string::npos && !isdigit(str[j])))
 			{

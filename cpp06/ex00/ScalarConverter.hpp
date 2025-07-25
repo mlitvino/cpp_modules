@@ -17,11 +17,12 @@ enum
 
 class ScalarConverter
 {
-	public:
+	private:
 		ScalarConverter();
 		ScalarConverter(const ScalarConverter& other);
+	public:
+		~ScalarConverter();
 		ScalarConverter& operator= (const ScalarConverter& other);
-		virtual ~ScalarConverter() = 0;
 
 		static void	convert(const std::string& str);
 

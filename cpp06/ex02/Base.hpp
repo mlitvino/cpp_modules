@@ -1,7 +1,7 @@
 #ifndef BASE_HPP
 #define BASE_HPP
 
-#include <ctime>
+#include <random>
 #include <exception>
 #include <iostream>
 
