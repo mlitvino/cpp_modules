@@ -65,7 +65,7 @@ static void convertStrToTypes(const std::string& str, int type)
 			in = static_cast<int>(ch);
 			fl = static_cast<float>(ch);
 			db = static_cast<double>(ch);
-			return printTypes(str, ch, in, fl, db);
+			return printTypes(std::to_string(ch) , ch, in, fl, db);
 		}
 		case INT_TYPE:
 		{

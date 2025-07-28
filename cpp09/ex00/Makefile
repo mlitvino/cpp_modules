@@ -1,4 +1,4 @@
-CC		= c++
+CC		= c++ -g
 CFLAGS	= -Wall -Wextra -std=c++20
 
 NAME	= BitcoinExchange
