@@ -1,9 +1,9 @@
 CC		= c++
-CFLAGS	= -Wall -Wextra -Werror -std=c++20
+CFLAGS	= -Wall -Wextra -std=c++20
 
-NAME	= btc
+NAME	= RPN
 
-SRC		=	main.cpp BitcoinExchange.cpp
+SRC		=	main.cpp RPN.cpp
 OBJ		= $(SRC:.cpp=.o)
 
 all: $(NAME)

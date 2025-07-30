@@ -1,38 +1,21 @@
 #include "BitcoinExchange.hpp"
 
-class dum : public std::exception
-{
-	public:
-		dum()
-		{
-			throw std::runtime_error("ahaha");
-		};
-};
-
 int	main(int ac, char **av)
 {
-	// if (ac != 2)
-	// {
-	// 	std::cout << "Usage: ./BitcoinExchange <database_name>" << std::endl;
-	// 	return 0;
-	// }
-	// try
-	// {
-	// 	BitcoinExchange	exec;
-
-	// 	exec.loadAmountDb(av[1]);
-	// }
-	// catch(std::exception& e)
-	// {
-	// 	std::cout << "Exception: " << e.what() << std::endl;
-	// }
+	if (ac != 2)
+	{
+		std::cout << "Usage: ./BitcoinExchange <database_name>" << std::endl;
+		return 0;
+	}
 	try
 	{
-		throw dum();
+		BitcoinExchange	exec;
+
+		exec.exchange(av[1]);
 	}
-	catch(const std::exception& e)
+	catch(std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cout << "Fatal Exception: " << e.what() << std::endl;
 	}
 
 	return 0;

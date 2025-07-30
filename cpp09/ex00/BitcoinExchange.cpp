@@ -7,10 +7,10 @@ ymd_t	BitcoinExchange::convertStrToDate(std::string& date)
 	std::istringstream ss(date);
 
 	if (fmt.length() != date.length())
-		ThrowLine("format is invalid!");
+		throw OptionalException("Error: bad date");
 	ss >> std::get_time(&tm, "%Y-%m-%d");
 	if (ss.fail())
-		ThrowLine("format is invalid!");
+		throw OptionalException("Error: bad date");
 	ymd_t	ymd
 	{
 		std::chrono::year{tm.tm_year + 1900} ,
@@ -28,55 +28,124 @@ double	BitcoinExchange::convertStrToValue(std::string& str_value)
 		|| str_value.find_first_of("+") != str_value.find_last_of("+")
 		|| str_value.find_first_of("-") != str_value.find_last_of("-")
 		|| str_value.find_first_of(".") != str_value.find_last_of("."))
-		ThrowLine("format is invalid!");
-	try
-	{
-		return std::stod(str_value);
-	}
-	catch(const std::exception& e)
-	{
-		return NAN;
-	}
-	return -1;
+		throw OptionalException("Error: bad value");
+	return std::stod(str_value);
 }
 
-void	BitcoinExchange::loadDataBase(map_t& db,std::string filename, std::string delim, std::string format)
+void	BitcoinExchange::loadDataBase(map_t& db,std::string filename)
 {
 	std::ifstream	infile(filename);
 	std::string		input;
+	std::string		delim = ",";
 
 	if (!infile.good())
-		ThrowLine("std::ifstream failed to open a database");
+		throw OptionalException("std::ifstream failed to open a database");
 	std::getline(infile, input);
-	if (input != format)
-		ThrowLine("format is invalid!");
+	if (input != "date,exchange_rate")
+		throw OptionalException("format is invalid!");
 	while (std::getline(infile, input))
 	{
-		std::cout << filename << " DB: " << input << std::endl;
 		if (input.find(delim) == std::string::npos)
-			ThrowLine("format is invalid!");
+			throw OptionalException("format is invalid!");
 		std::string	str_date = input.substr(0, input.find(delim));
 		std::string	str_value = input.substr(input.find(delim) + delim.length());
-		ymd_t	tm_date = convertStrToDate(str_date);
-		double	value = convertStrToValue(str_value);
-		db.emplace(tm_date, value);
-		std::cout << str_date << " | " << std::fixed << std::setprecision(2) << value << std::endl;
+		try
+		{
+			ymd_t	tm_date = convertStrToDate(str_date);
+			double	value = convertStrToValue(str_value);
+			db.emplace(tm_date, value);
+		}
+		catch(std::exception& e)
+		{
+			std::cout << e.what() << " => " << str_date << " | " << str_value << std::endl;
+		}
 	}
 	if (infile.bad())
-		ThrowLine("getline failed to get line");
+		throw OptionalException("getline failed to get line");
 }
 
-void	BitcoinExchange::loadAmountDb(std::string filename)
+double	BitcoinExchange::findValue(ymd_t& tm_date)
 {
-	loadDataBase(_amountDb, filename, " | ", "date | value");
+	for (auto it = _priceDb.end(), begin = _priceDb.begin();;)
+	{
+		--it;
+		if (!(it->first > tm_date))
+			return it->second;
+		if (it == begin)
+			break;
+	}
+	throw OptionalException("Error: no valid date in database");
+	return -1;
+}
+
+static std::string formatDouble(double value)
+{
+	std::ostringstream oss;
+	oss << std::fixed << std::setprecision(10) << value;
+	std::string s = oss.str();
+	s.erase(s.find_last_not_of('0') + 1, std::string::npos);
+	if (!s.empty() && s.back() == '.')
+		s.pop_back();
+	return s;
+}
+
+void	BitcoinExchange::exchange(std::string filename)
+{
+	std::ifstream	infile(filename);
+	std::string		input;
+	std::string		delim = " | ";
+
+	if (!infile.good())
+		throw OptionalException("std::ifstream failed to open a database");
+	std::getline(infile, input);
+	if (input != "date | value")
+		throw OptionalException("format is invalid!");
+	while (std::getline(infile, input))
+	{
+		if (input.find(delim) == std::string::npos)
+			throw OptionalException("format is invalid!");
+		std::string	str_date = input.substr(0, input.find(delim));
+		std::string	str_value = input.substr(input.find(delim) + delim.length());
+		try
+		{
+			ymd_t	input_date = convertStrToDate(str_date);
+			double	input_value = convertStrToValue(str_value);
+			if (input_value < MIN || input_value > MAX)
+				throw OptionalException("Error: value out of range");
+			double	db_value = findValue(input_date);
+			double res = input_value * db_value;
+			std::cout
+			<< str_date << " => " << formatDouble(db_value) << " = " << formatDouble(res)
+			<< std::endl;
+		}
+		catch(std::exception& e)
+		{
+			std::cout << e.what() << " => " << str_date << " | " << str_value << std::endl;
+		}
+	}
+	if (infile.bad())
+		throw OptionalException("getline failed to get line");
 }
 
 // Orthodox Canonical Form
 
+BitcoinExchange::~BitcoinExchange() {}
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
+	: _priceDb{other._priceDb}
+{}
+
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
+{
+	if (this == &other)
+		return *this;
+	_priceDb = other._priceDb;
+	return *this;
+}
+
 BitcoinExchange::BitcoinExchange()
 	: _priceDb{}
-	, _amountDb{}
 {
-	loadDataBase(_priceDb, PATH_PRICE_DB, ",", "date,exchange_rate");
+	loadDataBase(_priceDb, PATH_PRICE_DB);
 }
 
