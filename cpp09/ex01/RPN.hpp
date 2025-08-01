@@ -11,8 +11,13 @@ class RPN
 	private:
 		std::stack<int>	_stack;
 	public:
+		~RPN();
 		RPN();
-		void	fillIn(std::string arg);
+		RPN(const RPN& other);
+		RPN&	operator=(const RPN& other);
+
+		void	getInput(std::string arg);
+		void	calculate(char& op);
 };
 
 #endif

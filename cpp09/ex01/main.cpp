@@ -11,7 +11,7 @@ int	main(int ac, char **av)
 	{
 		RPN	exec;
 
-		exec.fillIn(av[1]);
+		exec.getInput(av[1]);
 	}
 	catch(std::exception& e)
 	{

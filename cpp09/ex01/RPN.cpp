@@ -1,22 +1,81 @@
 #include "RPN.hpp"
 
-void	RPN::fillIn(std::string arg)
+void	RPN::calculate(char& op)
 {
-	std::string ops = OPS;
-
-	for (auto it = arg.begin(), end = arg.end(); it != end; ++it)
+	if (_stack.size() < 2)
+		throw std::runtime_error("Error: operator has no operand");
+	int	right = _stack.top();
+	_stack.pop();
+	int	left = _stack.top();
+	_stack.pop();
+	switch (op)
 	{
-		if (!std::isdigit(*it) || ops.find(*it) == std::string::npos)
-			throw std::invalid_argument("Error: invalid character in argument");
-		_stack.push(*it);
-		
+		case '*':
+		{
+			return _stack.push(left * right);
+		}
+		case '/':
+		{
+			if (right == 0)
+				throw std::runtime_error("Error: division by zero forbidden");
+			return _stack.push(left / right);
+		}
+		case '-':
+		{
+			return _stack.push(left - right);
+		}
+		case '+':
+		{
+			return _stack.push(left + right);
+		}
 	}
+}
+
+void	RPN::getInput(std::string arg)
+{
+	std::string	ops = OPS;
+	bool		check_space = false;
+
+	for (char &c : arg)
+	{
+		if (!check_space)
+		{
+			if (std::isdigit(c))
+				_stack.push(c - '0');
+			else if (ops.find(c) != std::string::npos)
+				calculate(c);
+			else
+				throw std::runtime_error("Error: invalid character");
+			check_space = true;
+		}
+		else
+		{
+			if (c != ' ')
+				throw std::runtime_error("Error: invalid character");
+			check_space = false;
+		}
+	}
+	if (_stack.size() != 1)
+		throw std::runtime_error("Error: operand has no operator");
+	std::cout << _stack.top() << std::endl;
 }
 
 // Orthodox Canonical Form
 
+RPN::~RPN() {}
+
+RPN::RPN(const RPN& other)
+	: _stack{other._stack}
+{}
+
+RPN& RPN::operator =(const RPN& other)
+{
+	if (this == &other)
+		return *this;
+	_stack = other._stack;
+	return *this;
+}
+
 RPN::RPN()
 	: _stack{}
-{
-
-}
+{}
