@@ -1,47 +1,80 @@
 #include "Span.hpp"
 #include <iostream>
-#include <array>
+#include <vector>
+#include <list>
 
 int main()
 {
-    std::cout << "=== Span Tests ===" << std::endl;
+	std::vector<int> vec = {-1, 2, 3, 4, 5};
+	Span sp(vec.size());
 
-    // Test 1: Basic functionality
-    Span sp(5);
-	sp.addNumber(6);
-	sp.addNumber(3);
-	sp.addNumber(17);
-	sp.addNumber(14);
-	sp.addNumber(11);
-    std::cout << "ShortestSpan: " << sp.shortestSpan() << std::endl;
-    std::cout << "LongestSpan: " << sp.longestSpan() << std::endl;
+	for (auto &c : vec)
+	{
+		sp.addNumber(c);
+	}
+	std::cout << "Span: "; sp.printValues();
 
-    // Test 2: Exception when adding beyond capacity
-    try {
-        sp.addNumber(42);
-    } catch (const std::exception& e) {
-        std::cout << "Expected exception (addNumber): " << e.what() << std::endl;
-    }
+	std::cout << "ShortestSpan: " << sp.shortestSpan() << std::endl;
+	std::cout << "LongestSpan: " << sp.longestSpan() << std::endl;
 
-    // Test 3: Exception on spans with insufficient elements
-    Span sp2(1);
-    sp2.addNumber(100);
-    try {
-        sp2.shortestSpan();
-    } catch (const std::exception& e) {
-        std::cout << "Expected exception (shortestSpan): " << e.what() << std::endl;
-    }
-    try {
-        sp2.longestSpan();
-    } catch (const std::exception& e) {
-        std::cout << "Expected exception (longestSpan): " << e.what() << std::endl;
-    }
+	try {
+		sp.addNumber(42);
+	} catch (const std::exception& e) {
+		std::cerr << "Expected exception (addNumber): " << e.what() << std::endl;
+	}
 
-    // Test 4: Large span with addManyNumbers
-    Span sp3(10000);
-    sp3.addManyNumbers(10000);
-    std::cout << "Large Span - ShortestSpan: " << sp3.shortestSpan() << std::endl;
-    std::cout << "Large Span - LongestSpan: " << sp3.longestSpan() << std::endl;
+	Span sp2(1);
+	sp2.addNumber(100);
+	try {
+		sp2.shortestSpan();
+	} catch (const std::exception& e) {
+		std::cerr << "Expected exception (shortestSpan): " << e.what() << std::endl;
+	}
 
-    return 0;
+	try {
+		sp2.longestSpan();
+	} catch (const std::exception& e) {
+		std::cerr << "Expected exception (longestSpan): " << e.what() << std::endl;
+	}
+
+
+	std::list<int> list = {1, 2, 3, 4, 5};
+	std::vector<int> vec2 = {10, 20, 30, 40, 50};
+	Span sp3(100);
+	Span sp4(7);
+
+	for (auto &c : vec2)
+	{
+		sp3.addNumber(c);
+		sp4.addNumber(c);
+	}
+
+	sp3.insertRange(1, list.begin(), list.end());
+	std::cout << "Span3: "; sp3.printValues();
+
+
+	try
+	{
+		sp4.insertRange(1, list.begin(), list.end());
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << "Expected exception (insertRange): " << e.what() << '\n';
+	}
+	std::cout << "Span4: "; sp4.printValues();
+
+	return 0;
 }
+
+// int main()
+// {
+// 	Span sp = Span(5);
+// 	sp.addNumber(6);
+// 	sp.addNumber(3);
+// 	sp.addNumber(17);
+// 	sp.addNumber(9);
+// 	sp.addNumber(11);
+// 	std::cout << sp.shortestSpan() << std::endl;
+// 	std::cout << sp.longestSpan() << std::endl;
+// 	return 0;
+// }

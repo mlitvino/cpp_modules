@@ -32,14 +32,12 @@ int main()
 
 	std::stack<int> s(mstack);
 
-	MutantStack<int> s1;
+	// MutantStack<int> s1;
 
-	s1.push(2);
-	MutantStack<int> s2 = s1;
+	// s1.push(2);
+	// MutantStack<int> s2 = s1;
+	// s2 = s2;
+	// std::cout << s2.top() << std::endl;
 
-
-	s2 = s2;
-
-	std::cout << s2.top() << std::endl;
 	return 0;
 }

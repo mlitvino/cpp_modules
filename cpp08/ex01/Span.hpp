@@ -5,12 +5,14 @@
 #include <stdexcept>
 #include <vector>
 #include <cmath>
-#include <ctime>
+#include <iostream>
+#include <utility>
 
 class Span
 {
+
 	private:
-		std::vector<int> _arr;
+		std::vector<int> _vec;
 		size_t			_size;
 		size_t			_cap;
 	public:
@@ -23,14 +25,19 @@ class Span
 		void	addNumber(int n);
 		int		shortestSpan();
 		int		longestSpan();
-		void	addManyNumbers(int nAmount);
+		void	printValues();
 
-		template <typename Iterator>
-		void	addManyNumbers(Iterator begin, Iterator end)
+		template <typename It>
+		void	insertRange(size_t pos, It begin, It end)
 		{
-			for (; begin != end; ++begin)
+			if (pos >= _size)
+				throw std::length_error("position outside of vector");
+			for (;begin != end; ++begin)
 			{
-				addNumber(*begin);
+				if (_size == _cap)
+					throw std::length_error("no space left in vector");
+				_vec.insert(_vec.begin() + pos++, *begin);
+				++_size;
 			}
 		}
 };
