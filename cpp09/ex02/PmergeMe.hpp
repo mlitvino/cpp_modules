@@ -3,22 +3,27 @@
 
 #include <iostream>
 #include <vector>
-#include <utility>
-#include <optional>
+#include <list>
 #include <algorithm>
+
+#define INIT_PAIR_SIZE 2
 
 class PmergeMe
 {
 	private:
-		std::vector<std::pair<int,int>>	_vec;
+		std::vector<int>	_vec;
+		std::list<int>		_list;
 		double				_vecTime;
-		std::optional<int>	_tailVal;
-		void	sortVector();
+
+
+		char				**_av;
 	public:
-		void	getInput(char **av);
-		void	sortAll();
-		void	printResult(char **av);
 		PmergeMe();
+
+		void	parseInput(char **av);
+		void	insert(int pair_size);
+		void	sortPairs(int pair_size);
+		void	printResult(char **av);
 };
 
 #endif

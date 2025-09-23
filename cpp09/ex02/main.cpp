@@ -8,11 +8,13 @@ int	main(int ac, char **av)
 	{
 		PmergeMe	exec;
 
-		exec.getInput(&av[1]);
+		exec.parseInput(av);
+		exec.sortPairs(INIT_PAIR_SIZE);
+		exec.printResult(av);
 	}
 	catch (std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << e.what() << std::endl;
 	}
 
 	return 0;
