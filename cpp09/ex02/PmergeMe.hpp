@@ -3,27 +3,46 @@
 
 #include <iostream>
 #include <vector>
-#include <list>
+#include <deque>
 #include <algorithm>
+#include <cmath>
+#include <chrono>
 
 #define INIT_PAIR_SIZE 2
+#define INIT_JACOB_NBR 2
 
 class PmergeMe
 {
 	private:
 		std::vector<int>	_vec;
-		std::list<int>		_list;
-		double				_vecTime;
+		std::deque<int>		_deq;
+		std::chrono::time_point<std::chrono::steady_clock> _vecTime;
+		std::chrono::time_point<std::chrono::steady_clock> _deqTime;
 
-
-		char				**_av;
+		void	insertInVec(int pair_size);
+		void	insertInDeq(int pair_size);
 	public:
 		PmergeMe();
+		~PmergeMe();
+		PmergeMe(const PmergeMe &other);
+		PmergeMe& operator=(const PmergeMe &other);
 
 		void	parseInput(char **av);
-		void	insert(int pair_size);
-		void	sortPairs(int pair_size);
+		void	sortVector(int pair_size);
+		void	sortDeq(int pair_size);
 		void	printResult(char **av);
+
+	template <typename It>
+	bool	isSorted(It begin, It end)
+	{
+		for (auto last = *begin; begin != end; ++begin)
+		{
+			if (last > *begin)
+				return false;
+			last = *begin;
+		}
+		return true;
+	}
 };
 
 #endif
