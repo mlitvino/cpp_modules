@@ -86,7 +86,7 @@ void	PmergeMe::insertInDeq(int pair_size)
 		next_jacob_nbr = std::round((std::pow(2, jacob_nbr_idx + 1) + std::pow(-1, jacob_nbr_idx)) / 3);
 		for (int elem_idx = next_jacob_nbr - last_jacob_nbr - 1; elem_idx >= 0; --elem_idx)
 		{
-			if (elem_idx > pend.size() / pair_size - 1)
+			if (elem_idx > static_cast<int>(pend.size()) / pair_size - 1)
 				elem_idx = pend.size() / pair_size - 1;
 
 			int pend_idx = elem_idx * pair_size;
@@ -183,7 +183,7 @@ void	PmergeMe::insertInVec(int pair_size)
 		next_jacob_nbr = std::round((std::pow(2, jacob_nbr_idx + 1) + std::pow(-1, jacob_nbr_idx)) / 3);
 		for (int elem_idx = next_jacob_nbr - last_jacob_nbr - 1; elem_idx >= 0; --elem_idx)
 		{
-			if (elem_idx > pend.size() / pair_size - 1)
+			if (elem_idx > static_cast<int>(pend.size()) / pair_size - 1)
 				elem_idx = pend.size() / pair_size - 1;
 
 			int pend_idx = elem_idx * pair_size;
