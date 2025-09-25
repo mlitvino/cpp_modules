@@ -1,6 +1,5 @@
-CC		= c++
-CFLAGS	= -std=c++20 
-
+CC		= c++ -g3
+CFLAGS	=  -std=c++20
 #-Wall -Wextra -Werror
 
 NAME	= PmergeMe

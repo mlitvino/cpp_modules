@@ -16,8 +16,8 @@ class PmergeMe
 	private:
 		std::vector<int>	_vec;
 		std::deque<int>		_deq;
-		std::chrono::time_point<std::chrono::steady_clock> _vecTime;
-		std::chrono::time_point<std::chrono::steady_clock> _deqTime;
+		std::chrono::microseconds	_vecTime;
+		std::chrono::microseconds	_deqTime;
 
 		void	insertInVec(int pair_size);
 		void	insertInDeq(int pair_size);

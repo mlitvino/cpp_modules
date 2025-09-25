@@ -3,7 +3,7 @@
 void	RPN::calculate(char& op)
 {
 	if (_stack.size() < 2)
-		throw std::runtime_error("Error: operator has no operand");
+		throw std::runtime_error("operator has no operand");
 	int	right = _stack.top();
 	_stack.pop();
 	int	left = _stack.top();
@@ -17,7 +17,7 @@ void	RPN::calculate(char& op)
 		case '/':
 		{
 			if (right == 0)
-				throw std::runtime_error("Error: division by zero forbidden");
+				throw std::runtime_error("division by zero forbidden");
 			return _stack.push(left / right);
 		}
 		case '-':
@@ -45,18 +45,18 @@ void	RPN::getInput(std::string arg)
 			else if (ops.find(c) != std::string::npos)
 				calculate(c);
 			else
-				throw std::runtime_error("Error: invalid character");
+				throw std::runtime_error("invalid character");
 			check_space = true;
 		}
 		else
 		{
 			if (c != ' ')
-				throw std::runtime_error("Error: invalid character");
+				throw std::runtime_error("invalid character");
 			check_space = false;
 		}
 	}
 	if (_stack.size() != 1)
-		throw std::runtime_error("Error: operand has no operator");
+		throw std::runtime_error("operand has no operator");
 	std::cout << _stack.top() << std::endl;
 }
 

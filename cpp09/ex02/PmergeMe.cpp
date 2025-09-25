@@ -12,23 +12,16 @@ void	PmergeMe::printResult(char **av)
 		std::cout << c << " ";
 	std::cout << std::endl;
 
-	auto cur_time = std::chrono::steady_clock::now();
-	auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(cur_time - _vecTime);
-
 	std::cout
 	<< "Time to process a range of " << (_vec.size())
 	<< " elements with std::vector : "
-	<< elapsed.count()
-	<< " us"
+	<< _vecTime
 	<< std::endl;
-
-	elapsed = std::chrono::duration_cast<std::chrono::microseconds>(cur_time - _deqTime);
 
 	std::cout
 	<< "Time to process a range of " << (_deq.size())
 	<< " elements with std::deque : "
-	<< elapsed.count()
-	<< " us"
+	<< _deqTime
 	<< std::endl;
 
 	if (!isSorted(_vec.begin(), _vec.end()))
@@ -135,7 +128,7 @@ void	PmergeMe::insertInDeq(int pair_size)
 
 void	PmergeMe::sortDeq(int pair_size)
 {
-	_deqTime = std::chrono::steady_clock::now();
+	auto	start = std::chrono::steady_clock::now();
 	int pairs = _deq.size() / pair_size;
 
 	for (int i = 1; i < pairs + 1; ++i)
@@ -157,6 +150,9 @@ void	PmergeMe::sortDeq(int pair_size)
 	if (_deq.size() / new_pair_size > 0)
 		sortDeq(new_pair_size);
 	insertInDeq(pair_size / 2);
+
+	auto	end = std::chrono::steady_clock::now();
+	_deqTime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 }
 
 void	PmergeMe::insertInVec(int pair_size)
@@ -229,7 +225,7 @@ void	PmergeMe::insertInVec(int pair_size)
 
 void	PmergeMe::sortVector(int pair_size)
 {
-	_vecTime = std::chrono::steady_clock::now();
+	auto	start = std::chrono::steady_clock::now();
 	int pairs = _vec.size() / pair_size;
 
 	for (int i = 1; i < pairs + 1; ++i)
@@ -251,6 +247,9 @@ void	PmergeMe::sortVector(int pair_size)
 	if (_vec.size() / new_pair_size > 0)
 		sortVector(new_pair_size);
 	insertInVec(pair_size / 2);
+
+	auto	end = std::chrono::steady_clock::now();
+	_vecTime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 }
 
 // Orthodox Canonical Form

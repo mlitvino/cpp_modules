@@ -10,6 +10,7 @@ class RPN
 {
 	private:
 		std::stack<int>	_stack;
+		void	calculate(char& op);
 	public:
 		~RPN();
 		RPN();
@@ -17,7 +18,6 @@ class RPN
 		RPN&	operator=(const RPN& other);
 
 		void	getInput(std::string arg);
-		void	calculate(char& op);
 };
 
 #endif

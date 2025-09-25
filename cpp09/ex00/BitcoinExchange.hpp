@@ -17,36 +17,24 @@
 #define MIN 0
 #define MAX 1000
 
-typedef std::chrono::year_month_day ymd_t;
-typedef std::multimap<ymd_t, double> map_t;
+typedef std::chrono::year_month_day Ymd;
+typedef std::multimap<Ymd, double> PriceMap;
 
 class BitcoinExchange
 {
 	private:
-		map_t	_priceDb;
+		PriceMap	_priceDb;
 
-		ymd_t	convertStrToDate(std::string& date);
+		Ymd	convertStrToDate(std::string& date);
 		double	convertStrToValue(std::string& value);
-		void	loadDataBase(map_t& db,std::string filename);
-		double	findValue(ymd_t& str_date);
+		void	loadDataBase(PriceMap& db,std::string filename);
+		double	findValue(Ymd& str_date);
 	public:
 		~BitcoinExchange();
 		BitcoinExchange(const BitcoinExchange& other);
 		BitcoinExchange& operator=(const BitcoinExchange& other);
 		BitcoinExchange();
 		void	exchange(std::string filename);
-
-		class OptionalException : public std::exception
-		{
-			private:
-				const char *msg;
-			public:
-				OptionalException(const char *arg) : msg{arg} {};
-				const char* what() const noexcept override
-				{
-					return msg;
-				}
-		};
 };
 
 #endif
